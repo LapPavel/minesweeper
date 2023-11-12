@@ -1,0 +1,378 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+body.alt {
+  background-color: darkcyan;
+}
+
+h1 {
+  margin: 10px 0;
+  font-size: 38px;
+  color: #e21d1d;
+  font-family: 'Raleway', sans-serif;
+}
+
+.settings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.field-setting {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.field-size {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  width: fit-content;
+  border: 1px solid #666;
+  border-radius: 4px;
+}
+
+.field-size input { display: none; }
+
+.field-size label {
+  padding: 5px 8px;
+  border-right: 1px solid #666;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.field-size label:last-of-type{ border-right: 0; }
+
+.field-size label:hover{
+    background: lavender;
+}
+
+.field-size.alt label:hover{
+  background: cadetblue;
+}
+
+.field-size input:checked + label{
+  background: #a2d2ff;
+}
+
+.field-size.alt input:checked + label{
+  background: darkseagreen;
+}
+
+.field-mines {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-setting {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+}
+
+#num-mine {
+  height: 25px;
+  border-radius: 4px;
+  border: 1px solid #666;
+  text-align: center;
+  font-size: 16px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  width: 60px;
+  outline: none;
+  background-image: url('data:image/svg+xml;utf8,%3Csvg%20version%3D%221.1%22%20viewBox%3D%220%200%2050%2067%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cg%20fill%3D%22none%22%20stroke-width%3D%222%22%3E%3Cline%20x1%3D%221%22%20x2%3D%2250%22%20y1%3D%2233.5%22%20y2%3D%2233.5%22%20stroke%3D%22%23D8D8D8%22%2F%3E%3Cpolyline%20transform%3D%22translate(25%2020)%20rotate(45)%20translate(-25%20-20)%22%20points%3D%2219%2026%2019%2014%2032%2014%22%20stroke%3D%22%23000%22%2F%3E%3Cpolyline%20transform%3D%22translate(25%2045)%20rotate(225)%20translate(-25%20-45)%22%20points%3D%2219%2052%2019%2039%2032%2039%22%20stroke%3D%22%23000%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E');
+  background-position: center right;
+  background-size: contain;
+  background-repeat: no-repeat;
+  caret-color: transparent;
+}
+
+#num-mine::-webkit-inner-spin-button {
+  appearance: none;
+  opacity: 1;
+  background: transparent;
+  border-width: 0px;
+  margin: 0;
+  border-left: 1px solid #666;
+  height: 27px;
+  width: 17px;
+  cursor: pointer;
+}
+
+.new-game {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  height: 30px;
+  background-color: #a2d2ff;
+  border: 1px solid #666;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.new-game.alt {
+  background-color: darkseagreen;
+}
+
+.new-game:hover {
+  background-color: lavender;
+}
+
+.new-game.alt:hover {
+  background-color: cadetblue;
+}
+
+#switch {
+  display: none;
+}
+
+.switch_label {
+  cursor: pointer;
+  text-indent: -9999px;
+  width: 70px;
+  height: 30px;
+  background: #a2d2ff;;
+  display: block;
+  border-radius: 100px;
+  position: relative;
+}
+
+.switch_label:after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 90px;
+  transition: 0.3s;
+}
+
+#switch:checked + .switch_label {
+  background: darkseagreen;
+}
+
+#switch:checked + .switch_label:after {
+  left: calc(100% - 5px);
+  transform: translateX(-100%);
+}
+
+.switch_label:active:after {
+  width: 35px;
+}
+
+.mute {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  height: 30px;
+  width: 80px;
+  font-size: 18px;
+  background-color: #a2d2ff;
+  border: 1px solid #666;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.mute::before {
+  content: '🔊';
+}
+
+.mute.on::before {
+  content: '🔈';
+}
+
+.mute.alt {
+  background-color: darkseagreen;
+}
+
+.mute:hover {
+  background-color: lavender;
+}
+
+.mute.alt:hover {
+  background-color: cadetblue;
+}
+
+.info {
+  display: grid;
+  grid-template-columns: auto auto;
+  column-gap: 10px;
+  row-gap: 5px;
+}
+
+.info__item {
+  display: flex;
+  align-items: center;
+}
+
+.info__item img {
+  height: 20px;
+  padding-right: 5px;
+}
+
+.end-game {
+  font-family: 'Raleway', sans-serif;
+  font-size: 36px;
+  font-weight: bold;
+  opacity: 0;
+  visibility: hidden;
+  max-height: 0;
+  margin: 0;
+  transition: .3s ease;
+}
+
+.won {
+  color: #a675cb;
+}
+
+.lose {
+  color: #e21d1d;
+}
+
+.active {
+  opacity: 1;
+  visibility: visible;
+  max-height: 64px;
+}
+
+.field {
+  display: grid;
+  padding: 10px;
+}
+
+.cell {
+  width: 25px;
+  height: 25px;
+  background-color: #a2d2ff;
+  margin: 2px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cell.alt:not(.open) {
+  background-color: darkseagreen;
+}
+
+.cell:not(.boom):not(.open):hover {
+  background-color: lavender;
+}
+
+.cell:not(.boom):not(.open).alt:hover {
+  background-color: cadetblue;
+}
+
+.open {
+  background-color: khaki;
+}
+
+.bomb {
+  background-image: url(./assets/icon/bomb.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.flag {
+  background-image: url(./assets/icon/flag.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.boom {
+  background-color: tomato;
+}
+
+.\31,
+.\35 {
+  color: blue;
+}
+
+.\32,
+.\36 {
+  color: green;
+}
+
+.\33,
+.\37 {
+  color: tomato;
+}
+
+.\34,
+.\38 {
+  color: brown;
+}
+
+.highscore {
+  color: #a675cb;
+  padding-bottom: 10px;
+}
+
+.highscore.alt {
+  color: aliceblue;
+}
+
+h3 {
+  margin: 10px 0;
+  font-family: 'Raleway', sans-serif;
+  font-size: 24px;
+  text-align: center;
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.results_item {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  justify-items: center;
+  align-items: center;
+}
+
+.results_item span {
+  font-family: 'Raleway', sans-serif;
+  font-size: 18px;
+}
+
+@media(620px <= width <= 750px) {
+  .end-game {
+    font-size: 32px;
+  }
+
+  .cell {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media(width < 620px) {
+  .end-game {
+    font-size: 28px;
+  }
+
+  .cell {
+    width: 15px;
+    height: 15px;
+  }
+}
