@@ -67,31 +67,20 @@ const tabHighScore = document.querySelector('.highscore');
 const fieldSize = document.querySelector('.field-size');
 const muteBtn = document.querySelector('.mute');
 
-const audioClick = new Audio();
-audioClick.src = './assets/sound/click.mp3';
-const audioLose = new Audio();
-audioLose.src = './assets/sound/lose.mp3';
-const audioWin = new Audio();
-audioWin.src = './assets/sound/win.mp3';
-const audioFlag = new Audio();
-audioFlag.src = './assets/sound/flag.mp3';
-const audioClean = new Audio();
-audioClean.src = './assets/sound/clean.mp3';
+const audioResources = {
+  click: new Audio('./assets/sound/click.mp3'),
+  lose: new Audio('./assets/sound/lose.mp3'),
+  win: new Audio('./assets/sound/win.mp3'),
+  flag: new Audio('./assets/sound/flag.mp3'),
+  clean: new Audio('./assets/sound/clean.mp3')
+};
+Object.values(audioResources).forEach(audio => {
+  audio.switchMute = () => audio.muted = !audio.muted
+});
 
 function muteSound() {
   muteBtn.classList.toggle('on');
-  const audio = [audioClick, audioLose, audioWin, audioFlag, audioClean];
-  if (!audioClick.muted) {
-    audio.forEach((el) => {
-      const l = el;
-      l.muted = true;
-    });
-  } else {
-    audio.forEach((el) => {
-      const l = el;
-      l.muted = false;
-    });
-  }
+  Object.values(audioResources).forEach(audio => audio.switchMute())
 }
 
 muteBtn.addEventListener('click', muteSound);
@@ -243,21 +232,21 @@ function boom() {
   setHighScore(result);
   gameStatus = 'lose';
   pushResult(result);
-  if (audioClick.play() !== undefined) {
-    audioClick.play().then(() => {
-      audioClick.pause();
+  if (audioResources.click.play() !== undefined) {
+    audioResources.click.play().then(() => {
+      audioResources.click.pause();
     });
   }
-  audioLose.currentTime = 0;
-  audioLose.play();
+  audioResources.lose.currentTime = 0;
+  audioResources.lose.play();
 }
 
 function openCells(i, j) {
   if (mines[i][j].open || mines[i][j].flag) {
     return;
   }
-  audioClick.currentTime = 0;
-  audioClick.play();
+  audioResources.click.currentTime = 0;
+  audioResources.click.play();
   mines[i][j].open = true;
   field[i * rowSize + j].className = 'cell open';
   openedCells += 1;
@@ -269,13 +258,13 @@ function openCells(i, j) {
     setHighScore(result);
     gameStatus = 'win';
     pushResult(result);
-    if (audioClick.play() !== undefined) {
-      audioClick.play().then(() => {
-        audioClick.pause();
+    if (audioResources.click.play() !== undefined) {
+      audioResources.click.play().then(() => {
+        audioResources.click.pause();
       });
     }
-    audioWin.currentTime = 0;
-    audioWin.play();
+    audioResources.win.currentTime = 0;
+    audioResources.win.play();
   }
   if (mines[i][j].adjacentMines !== 0) {
     field[i * rowSize + j].textContent = mines[i][j].adjacentMines;
@@ -320,14 +309,14 @@ function markFlag(i, j) {
     field[i * rowSize + j].classList.add('flag');
     mines[i][j].flag = true;
     numFlags += 1;
-    audioFlag.currentTime = 0;
-    audioFlag.play();
+    audioResources.flag.currentTime = 0;
+    audioResources.flag.play();
   } else {
     field[i * rowSize + j].classList.remove('flag');
     mines[i][j].flag = false;
     numFlags -= 1;
-    audioClean.currentTime = 0;
-    audioClean.play();
+    audioResources.clean.currentTime = 0;
+    audioResources.clean.play();
   }
   countFlags.textContent = numFlags;
 }
