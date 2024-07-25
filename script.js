@@ -12,6 +12,7 @@ body.innerHTML = `
       <label for="25">25x25</label>
     </div>
     <div class="field-mines">
+      <label for="ran-mine">Mine 💥 count:</label>
       <input type="range" name="mines" id="ran-mine" min="10" max="99" value="10" step="1">
       <input type="number" name="mines" id="num-mine" min="10" max="99" value="10" step="1">
     </div>
@@ -226,10 +227,7 @@ function boom() {
   gameStoped = true;
   endGame.classList.add('active', 'lose');
   endGame.textContent = '☠️ YOU LOSE ☠️';
-  const result = ['☠️', `${rowSize}x${rowSize}`, sec, numMoves, numMines];
-  setHighScore(result);
   gameStatus = 'lose';
-  pushResult(result);
   if (audioResources.click.play() !== undefined) {
     audioResources.click.play().then(() => {
       audioResources.click.pause();
